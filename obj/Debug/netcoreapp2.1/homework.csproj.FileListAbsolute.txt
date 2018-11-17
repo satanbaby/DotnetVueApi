@@ -1,0 +1,14 @@
+D:\ProjectTest\homework\bin\Debug\netcoreapp2.1\homework.deps.json
+D:\ProjectTest\homework\bin\Debug\netcoreapp2.1\homework.runtimeconfig.json
+D:\ProjectTest\homework\bin\Debug\netcoreapp2.1\homework.runtimeconfig.dev.json
+D:\ProjectTest\homework\bin\Debug\netcoreapp2.1\homework.dll
+D:\ProjectTest\homework\bin\Debug\netcoreapp2.1\homework.pdb
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.csprojAssemblyReference.cache
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.csproj.CoreCompileInputs.cache
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.RazorAssemblyInfo.cache
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.RazorAssemblyInfo.cs
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.AssemblyInfoInputs.cache
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.AssemblyInfo.cs
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.RazorTargetAssemblyInfo.cache
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.dll
+D:\ProjectTest\homework\obj\Debug\netcoreapp2.1\homework.pdb

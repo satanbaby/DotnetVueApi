@@ -29,12 +29,12 @@ export default {
     Navbar,
     Sliderbar
   },
-  created() {
-    let api = `${process.env.API_PATH}/api/values`
-    this.$http.get(api).then((response) => {
-      console.log(response.data)
-    })
-  },  
+  // created() {
+  //   let api = `${process.env.API_PATH}/api/shoping`
+  //   this.$http.get(api).then((response) => {
+  //     console.log(response.data)
+  //   })
+  // },  
 }
 </script>
 

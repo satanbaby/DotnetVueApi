@@ -41,9 +41,13 @@ namespace homework.Controllers
       // POST api/shoping
       [HttpPost("")]
       public IActionResult Create(Member item){
+        if (SContext.Members.Find(item.UId)==null){
         SContext.Members.Add(item);
         SContext.SaveChanges();
         return CreatedAtRoute("GetShoping",new {id=item.UId},item);
+        }else{
+          return NotFound();
+        }
       }
 
       // PUT api/shoping/5
@@ -59,7 +63,7 @@ namespace homework.Controllers
 
         SContext.Members.Update(items);
         SContext.SaveChanges();
-        return NoContent();
+        return Ok(items);
       }
 
       // DELETE api/shoping/5

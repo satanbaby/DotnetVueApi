@@ -7,71 +7,73 @@ using homework.Models;
 
 namespace homework.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ShopingController : ControllerBase
-    {
-      private readonly ShopingContext SContext;
-        public ShopingController(ShopingContext context) { 
-          SContext = context;
-          if(SContext.Members.Count()==0){
-            SContext.Members.Add(new Member{UName="Item1",UId="1"});
-            SContext.SaveChanges();
-          }
-        }
-
-        // GET api/shoping
-        [HttpGet]
-        public ActionResult<List<Member>> GetAll()
-        {
-            return SContext.Members.ToList();
-        }
-
-        // GET api/shoping/5
-        [HttpGet("{id}",Name="GetShoping")]
-        public ActionResult<Member> GetById(string id)
-        {
-            var item = SContext.Members.Find(id);
-            if(item==null){
-              return Content("NotFound");
-            }
-            return item;
-        }
-
-        // POST api/shoping
-        [HttpPost("")]
-        public IActionResult Create(Member item){
-          SContext.Members.Add(item);
+  [Route("api/[controller]")]
+  [ApiController]
+  public class ShopingController : ControllerBase
+  {
+    private readonly ShopingContext SContext;
+      public ShopingController(ShopingContext context) { 
+        SContext = context;
+        if(SContext.Members.Count()==0){
+          SContext.Members.Add(new Member{UName="Item1",UId="1"});
           SContext.SaveChanges();
-          return CreatedAtRoute("GetShoping",new {id=item.UId},item);
         }
+      }
 
-        // PUT api/shoping/5
-        [HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value) { }
-        public IActionResult Update(string id,Member item){
-          var items = SContext.Members.Find(id);
-          if (item==null){
-              return NotFound();
+      // GET api/shoping
+      [HttpGet]
+      public ActionResult<List<Member>> GetAll()
+      {
+          return SContext.Members.ToList();
+      }
+
+      // GET api/shoping/5
+      [HttpGet("{id}",Name="GetShoping")]
+      public ActionResult<Member> GetById(string id)
+      {
+          var item = SContext.Members.Find(id);
+          if(item==null){
+            return Content("NotFound");
           }
-          items.UName=item.UName;
-          items.UPwd=item.UPwd;
+          return item;
+      }
 
-          SContext.Members.Update(items);
-          SContext.SaveChanges();
-          return NoContent();
-        }
+      // POST api/shoping
+      [HttpPost("")]
+      public IActionResult Create(Member item){
+        SContext.Members.Add(item);
+        SContext.SaveChanges();
+        return CreatedAtRoute("GetShoping",new {id=item.UId},item);
+      }
 
-        // DELETE api/shoping/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(string id){
-          var member=SContext.Members.Find(id);
-          if(member==null){
+      // PUT api/shoping/5
+      [HttpPut("{id}")]
+      //public void Put(int id, [FromBody] string value) { }
+      public IActionResult Update(string id,Member item){
+        var items = SContext.Members.Find(id);
+        if (item==null){
             return NotFound();
-          }
-          SContext.Members.Remove(member);
-          SContext.SaveChanges();
-          return NoContent();
         }
+        items.UName=item.UName;
+        items.UPwd=item.UPwd;
+
+        SContext.Members.Update(items);
+        SContext.SaveChanges();
+        return NoContent();
+      }
+
+      // DELETE api/shoping/5
+      [HttpDelete("{id}")]
+      public IActionResult Delete(string id){
+        var member=SContext.Members.Find(id);
+        if(member==null){
+          return NotFound();
+        }
+        SContext.Members.Remove(member);
+        SContext.SaveChanges();
+        return NoContent();
+      }
     }
+
+    
 }

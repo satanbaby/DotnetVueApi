@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Login from '@/components/page/Login'
 
 import Products from '@/components/page/Product'
+import PrdMan from '@/components/page/PrductMan'
 import Order from '@/components/page/Order'
 import Member from '@/components/page/Member'
 Vue.use(Router)
@@ -19,6 +20,10 @@ export default new Router({
           path: 'products',
           name: 'Product',
           component: Products,
+       },{
+          path: 'pruductman',
+          name: 'PrdMan',
+          component: PrdMan,
        },{
           path: 'order',
           name: 'Order',

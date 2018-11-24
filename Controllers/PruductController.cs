@@ -37,6 +37,7 @@ namespace homework.Controllers
         [HttpPost("")]
         public IActionResult Create(Pruduct item){
           if(SContext.Pruducts.Find(item.PId)==null){
+            item.PId=item.PId.ToUpper();
             SContext.Pruducts.Add(item);
             SContext.SaveChanges();
             return CreatedAtRoute("GetShoping",new {id=item.PId},item);

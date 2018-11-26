@@ -5,6 +5,9 @@ dotnet core webApi + vue.js + Bootstrap
 
 ## 快速導覽
 
+前端
+`./ClientApp`
+
 跨網域表頭
 
 `Startup.cs--line42`

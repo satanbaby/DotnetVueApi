@@ -1,4 +1,14 @@
 # 期末作業
+
+```
+git clone https://github.com/satanbaby/DotnetVueApi.git
+dotnet restore
+cd ClientApp
+npm install
+npm run dev
+cd ..
+dotnet run
+```
 ### 使用技術
 
 dotnet core webApi + vue.js + Bootstrap

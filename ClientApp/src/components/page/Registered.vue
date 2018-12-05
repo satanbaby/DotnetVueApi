@@ -14,6 +14,7 @@
       v-model="userData.UName" class="form-control" placeholder="帳號暱稱" required>
       <button class="btn btn-lg btn-primary btn-block" type="submit">註冊</button>
     </form>
+      <router-link class="text-secondary" :to='{name:"Login"}'>已有帳號，登入</router-link>
   </div>
 </template>
 

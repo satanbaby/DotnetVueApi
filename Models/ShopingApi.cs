@@ -22,7 +22,8 @@ namespace homework.Models
       [Key]
       public string OId { get; set; }
       public string Member { get; set; }
-      public string order { get; set; }
+      public string PruductID{get;set;}
+      public ushort orderQty { get; set; }
     }
     public class Admin{
       [Key]

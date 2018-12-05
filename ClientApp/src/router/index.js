@@ -33,10 +33,6 @@ export default new Router({
           name: 'Order',
           component: Order,
         },{
-          path: 'registered',
-          name: 'Registered',
-          component: Registered,
-        },{
           path: 'member',
           name: 'Member',
           component: Member,
@@ -47,6 +43,10 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },{
+      path: '/registered',
+      name: 'Registered',
+      component: Registered,
     }
   ]
 })

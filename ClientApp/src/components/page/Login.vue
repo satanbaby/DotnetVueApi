@@ -11,6 +11,7 @@
       <small id="emailHelp" class="form-text text-danger">{{msg}}</small>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
+    <router-link class="text-secondary" :to='{name:"Registered"}'>沒有帳號，註冊</router-link>
   </div>
 </template>
 <script>

@@ -1,9 +1,23 @@
 # 期末作業
+
+```
+git clone https://github.com/satanbaby/DotnetVueApi.git
+dotnet restore
+cd ClientApp
+npm install
+npm run dev
+cd ..
+dotnet run
+```
 ### 使用技術
 
 dotnet core webApi + vue.js + Bootstrap
 
 ## 快速導覽
+
+前端
+
+`./ClientApp`
 
 跨網域表頭
 
@@ -30,8 +44,6 @@ api/shoping/:id
 註冊會員
 post
 api/shoping
-- [x] 若id已存在
-
 刪除會員
 delete
 api/shoping/:id

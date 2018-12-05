@@ -9,7 +9,7 @@ using homework.Models;
 namespace homework.Migrations
 {
     [DbContext(typeof(ShopingContext))]
-    [Migration("20181202125958_init")]
+    [Migration("20181205154245_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,25 +53,13 @@ namespace homework.Migrations
 
                     b.Property<string>("Member");
 
+                    b.Property<string>("PruductID");
+
+                    b.Property<int>("orderQty");
+
                     b.HasKey("OId");
 
-                    b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("homework.Models.Orders", b =>
-                {
-                    b.Property<string>("pid")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("OrderOId");
-
-                    b.Property<int>("Qty");
-
-                    b.HasKey("pid");
-
-                    b.HasIndex("OrderOId");
-
-                    b.ToTable("orders");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("homework.Models.Pruduct", b =>
@@ -88,13 +76,6 @@ namespace homework.Migrations
                     b.HasKey("PId");
 
                     b.ToTable("Pruducts");
-                });
-
-            modelBuilder.Entity("homework.Models.Orders", b =>
-                {
-                    b.HasOne("homework.Models.Order")
-                        .WithMany("order")
-                        .HasForeignKey("OrderOId");
                 });
 #pragma warning restore 612, 618
         }

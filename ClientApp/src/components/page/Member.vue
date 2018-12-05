@@ -1,105 +1,90 @@
 <template>
-  <div class="text-center container">
-    <form class="form-signin" @submit.prevent="registered">
-      <img class="mb-4" src="@/assets/logo.png" alt="" width="144" height="144">
-      <h1 class="h3 mb-3 font-weight-normal">註冊</h1>
-      <label for="UId">註冊帳號</label>
-      <input type="text" id="UId"
-      v-model="userData.UId" class="form-control" placeholder="註冊帳號" required autofocus>
-      <label for="UPwd">密碼</label>
-      <input type="password" id="UPwd"
-      v-model="userData.UPwd" class="form-control" placeholder="密碼" required>
-      <label for="UName">帳號暱稱</label>
-      <input type="text" id="UName"
-      v-model="userData.UName" class="form-control" placeholder="帳號暱稱" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">註冊</button>
-    </form>
+  <div>
+    <h1 class="text-left mb-5">會員管理</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">使用者ID</th>
+          <th scope="col">使用者密碼</th>
+          <th scope="col">使用者名字</th>
+          <th scope="col">編輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item,index) in member" :key="item.uId">
+          <th scope="row">{{index+1}}</th>
+          <td>{{item.uId}}</td>
+          <td>{{item.uPwd}}</td>
+          <td>{{item.uName}}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-outline-danger mg-0">編輯</button>
+              <button class="btn btn-danger mg-0" @click="DelMem(item.uId)">刪除</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <form class="container" @submit.prevent="creatPrd">
+        <h3>新增產品</h3>
+      <div class="form-group">
+        
+        <label for="pid">新增產品ID</label>
+        <input type="text" class="form-control"
+        v-model="newPrd.pId" id="pid" placeholder="請輸入產品ID" required>
+      </div>
+      <div class="form-group">
+        <label for="pname">產品名稱</label>
+        <input type="text" class="form-control"
+        v-model="newPrd.pName" id="pname" placeholder="請輸入產品名稱" required>
+      </div>
+      <div class="form-group">
+        <label for="price">價格</label>
+        <input type="number" class="form-control"
+        v-model="newPrd.price" id="price" placeholder="請輸入價格">
+      </div>
+      <div class="form-group">
+        <label for="qty">數量</label>
+        <input type="number" class="form-control"
+        v-model="newPrd.qty" id="qty" placeholder="請輸入數量">
+      </div>
+      <button type="submit" class="btn btn-sucess">新增</button>
+    </form> -->
   </div>
 </template>
-
 <script>
 export default {
   data() {
     return {
-      userData:{
-        UId:'',
-        UPwd:'',
-        UName:''
-      }
+      member:[]
     };
   },
   methods:{
-    registered(){
+    getMem(){
       let api = `${process.env.API_PATH}/api/shoping`;
-      let vm = this;
-      console.log(vm.userData)
-      this.$http.post(api,vm.userData).then(response => {
-        
-        console.log(response);
+      this.$http.get(api).then(response => {
+        console.log(response.data);
+        this.member = response.data;
+        console.log("Member",this.member)
       });
+    },
+    DelMem(id){
+      let vm = this;
+      let api = `${process.env.API_PATH}/api/shoping/${id}`;
+      console.log(api)
+      this.$http.delete(api).then(response => {
+        console.log(response);
+        if(response.status===204){
+          vm.getMem();
+        }
+      });  
     }
   },
   created() {
     let vm = this;
-    let api = `${process.env.API_PATH}/api/pruduct`;
-    this.$http.get(api).then(response => {
-      console.log(response);
-      if(response.statusText=="OK"){
-        vm.$router.push("./order")
-      }
-    });
+    vm.getMem();
   }
 };
 </script>
-
-<style scoped>
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: flex;
-  -ms-flex-align: center;
-  -ms-flex-pack: center;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
-}
-
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
-.form-signin .checkbox {
-  font-weight: 400;
-}
-.form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-</style>

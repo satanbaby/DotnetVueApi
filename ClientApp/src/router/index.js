@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import 'bootstrap/js/dist/modal';
+
 import Home from '@/components/Home'
 import Login from '@/components/page/Login'
+
 
 import Products from '@/components/page/Product'
 import PrdMan from '@/components/page/PrductMan'
 import Order from '@/components/page/Order'
+import Registered from '@/components/page/Registered'
 import Member from '@/components/page/Member'
 Vue.use(Router)
 
@@ -29,9 +33,13 @@ export default new Router({
           name: 'Order',
           component: Order,
         },{
-            path: 'member',
-            name: 'Member',
-            component: Member,
+          path: 'registered',
+          name: 'Registered',
+          component: Registered,
+        },{
+          path: 'member',
+          name: 'Member',
+          component: Member,
         },
       ]
     },

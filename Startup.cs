@@ -6,12 +6,14 @@ using homework.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Session;
 
 namespace homework
 {
@@ -30,9 +32,17 @@ namespace homework
           // using Microsoft.EntityFrameworkCore;
           services.AddDbContext<ShopingContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-          
-            services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+          //Session      
+          services.AddDistributedMemoryCache();
+          services.AddSession(Options=>{
+            Options.Cookie.SecurePolicy=CookieSecurePolicy.Always;
+            Options.Cookie.Name="myWebsite";
+            Options.IdleTimeout=TimeSpan.FromMinutes(10);
+          });
+
+          //Cors
+          services.AddCors();
+          services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
         }
 
@@ -45,6 +55,9 @@ namespace homework
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
+
+          //使用session
+          app.UseSession();
 
             if (env.IsDevelopment())
             {

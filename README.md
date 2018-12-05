@@ -30,7 +30,8 @@ api/shoping/:id
 註冊會員
 post
 api/shoping
-[x] 若id已存在
+- [x] 若id已存在
+
 刪除會員
 delete
 api/shoping/:id

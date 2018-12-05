@@ -2,7 +2,7 @@
 
 namespace homework.Migrations
 {
-    public partial class second : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,20 @@ namespace homework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "Members",
+                columns: table => new
+                {
+                    UId = table.Column<string>(nullable: false),
+                    UPwd = table.Column<string>(nullable: true),
+                    UName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Members", x => x.UId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
                 columns: table => new
                 {
                     OId = table.Column<string>(nullable: false),
@@ -27,7 +40,7 @@ namespace homework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OId);
+                    table.PrimaryKey("PK_Order", x => x.OId);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,6 +56,30 @@ namespace homework.Migrations
                 {
                     table.PrimaryKey("PK_Pruducts", x => x.PId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "orders",
+                columns: table => new
+                {
+                    pid = table.Column<string>(nullable: false),
+                    Qty = table.Column<int>(nullable: false),
+                    OrderOId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_orders", x => x.pid);
+                    table.ForeignKey(
+                        name: "FK_orders_Order_OrderOId",
+                        column: x => x.OrderOId,
+                        principalTable: "Order",
+                        principalColumn: "OId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_orders_OrderOId",
+                table: "orders",
+                column: "OrderOId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -51,10 +88,16 @@ namespace homework.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Members");
+
+            migrationBuilder.DropTable(
+                name: "orders");
 
             migrationBuilder.DropTable(
                 name: "Pruducts");
+
+            migrationBuilder.DropTable(
+                name: "Order");
         }
     }
 }

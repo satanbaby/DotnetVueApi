@@ -53,7 +53,23 @@ namespace homework.Migrations
 
                     b.HasKey("OId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("homework.Models.Orders", b =>
+                {
+                    b.Property<string>("pid")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("OrderOId");
+
+                    b.Property<int>("Qty");
+
+                    b.HasKey("pid");
+
+                    b.HasIndex("OrderOId");
+
+                    b.ToTable("orders");
                 });
 
             modelBuilder.Entity("homework.Models.Pruduct", b =>
@@ -70,6 +86,13 @@ namespace homework.Migrations
                     b.HasKey("PId");
 
                     b.ToTable("Pruducts");
+                });
+
+            modelBuilder.Entity("homework.Models.Orders", b =>
+                {
+                    b.HasOne("homework.Models.Order")
+                        .WithMany("order")
+                        .HasForeignKey("OrderOId");
                 });
 #pragma warning restore 612, 618
         }

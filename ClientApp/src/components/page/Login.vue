@@ -3,16 +3,12 @@
     <form class="form-signin" @submit="signin">
       <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
       <label for="inputEmail" class="sr-only">帳號</label>
-      <input type="email" id="inputEmail" class="form-control" 
-      v-model="user.userId" placeholder="帳號" required autofocus>
+      <input type="text" id="id" class="form-control" 
+      v-model="user.UId" placeholder="帳號" required autofocus>
       <label for="inputPassword" class="sr-only">密碼</label>
-      <input type="password" id="inputPassword" class="form-control"
-      v-model="user.userPwd" placeholder="密碼" required>
-      <!-- <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div> -->
+      <input type="password" id="pwd" class="form-control"
+      v-model="user.UPwd" placeholder="密碼" required>
+      <small id="emailHelp" class="form-text text-danger">{{msg}}</small>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
   </div>
@@ -22,17 +18,26 @@ export default {
   data(){
     return{
       user:{
-        userId:'',
-        userPwd:''
-      }
+        UId:'',
+        UPwd:''
+      },
+      msg:'1234'
     }
   },
   methods:{
     signin(){
       let vm = this;
-      let api = `${process.env.API_PATH}/api/values`
+      console.log(vm.user)
+      let api = `${process.env.API_PATH}/api/shoping/login`
       this.$http.post(api,vm.user).then((response) => {
-        console.log(response.data)
+        console.log(response)
+        if(response.status==200){
+          this.$router.push({"name":"Product"})
+        }else{
+          console.log(response)
+          // console.log("帳號密碼錯誤")
+          // vm.msg="帳號密碼錯誤!"
+        }
       })
     }
   }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace homework.Models
@@ -15,13 +16,13 @@ namespace homework.Models
       public string PId { get; set; }
       public string PName { get; set; }
       public int Price { get; set; }
-      public int Qty { get; set; }
+      public ushort Qty { get; set; }
     }
     public class Order{
       [Key]
       public string OId { get; set; }
       public string Member { get; set; }
-      //public string[] Pruduct { get; set; }
+      public string order { get; set; }
     }
     public class Admin{
       [Key]

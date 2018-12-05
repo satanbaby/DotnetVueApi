@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using homework.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace homework.Controllers
 {
+
   [Route("api/[controller]")]
   [ApiController]
   public class ShopingController : ControllerBase
@@ -18,6 +20,25 @@ namespace homework.Controllers
           SContext.Members.Add(new Member{UName="Item1",UId="1"});
           SContext.SaveChanges();
         }
+      }
+      //=================登入===============
+      [HttpPost("login")]
+      public ActionResult Login(Member item){
+        var members=SContext.Members;
+        var member = members.Where(m=>m.UId==item.UId&& m.UPwd==item.UPwd).FirstOrDefault();
+        if(member==null){
+          HttpContext.Session.Clear();
+          return NotFound();
+        }
+        //Session["Member"]=member;
+        HttpContext.Session.SetString("Member",member.ToString());
+        return Ok(member);
+      }
+      //=================登出===============
+      [HttpGet]
+      public ActionResult Logout(){
+        HttpContext.Session.Clear();
+        return Ok();
       }
 
       // GET api/shoping

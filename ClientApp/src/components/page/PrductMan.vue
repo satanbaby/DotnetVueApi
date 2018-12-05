@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h1 class="text-left mb-5">購物車</h1>
+    <h1 class="text-left mb-5">產品管理</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-success float-right mb-4"
+    @click="isNew=true" data-toggle="modal" data-target="#CreatePrd">
+      新增
+    </button>
     <table class="table">
       <thead>
         <tr>
@@ -21,42 +26,81 @@
           <td>{{item.qty}}</td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-danger mg-0">編輯</button>
-              <button class="btn btn-danger mg-0" @click="deleteitem(item.pId)">刪除</button>
+              <button class="btn btn-outline-danger mg-0"
+               @click="getitem(item.pId),isNew=false" data-toggle="modal" data-target="#CreatePrd">編輯</button>
+              <button class="btn btn-danger mg-0"
+               @click="deleteitem(item.pId)">刪除</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <form class="container" @submit.prevent="creatPrd">
-        <h3>新增產品</h3>
-      <div class="form-group">
-        
-        <label for="pid">新增產品ID</label>
-        <input type="text" class="form-control"
-        v-model="newPrd.pId" id="pid" placeholder="請輸入產品ID" required>
+    <!-- Modal -->
+    <div class="modal fade" id="CreatePrd" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">新增產品</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="container" @submit="creatPrd" v-if="isNew">
+              <div class="form-group">
+                <label for="pid">新增產品ID</label>
+                <input type="text" class="form-control"
+                v-model="newPrd.pId" id="pid" placeholder="請輸入產品ID" required>
+              </div>
+              <div class="form-group">
+                <label for="pname">產品名稱</label>
+                <input type="text" class="form-control"
+                v-model="newPrd.pName" id="pname" placeholder="請輸入產品名稱" required>
+              </div>
+              <div class="form-group">
+                <label for="price">價格</label>
+                <input type="number" class="form-control"
+                v-model="newPrd.price" id="price" placeholder="請輸入價格">
+              </div>
+              <div class="form-group">
+                <label for="qty">數量</label>
+                <input type="number" class="form-control"
+                v-model="newPrd.qty" id="qty" placeholder="請輸入數量">
+              </div>
+            <button type="submit" class="btn btn-success m-4">新增</button>
+          </form>
+          <!-- 編輯 -->
+          <form class="container" @submit="edititem(editPrd.pId)" v-if="!isNew">
+              <div class="form-group">
+                <label for="pid">產品ID</label>
+                <input type="text" class="form-control"
+                v-model="editPrd.pId" id="pid" disabled>
+              </div>
+              <div class="form-group">
+                <label for="pname">產品名稱</label>
+                <input type="text" class="form-control"
+                v-model="editPrd.pName" id="pname" placeholder="請輸入產品名稱" required>
+              </div>
+              <div class="form-group">
+                <label for="price">價格</label>
+                <input type="number" class="form-control"
+                v-model="editPrd.price" id="price" placeholder="請輸入價格">
+              </div>
+              <div class="form-group">
+                <label for="qty">數量</label>
+                <input type="number" class="form-control"
+                v-model="editPrd.qty" id="qty" placeholder="請輸入數量">
+              </div>
+            <button type="submit" class="btn btn-success m-4">編輯</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="pname">產品名稱</label>
-        <input type="text" class="form-control"
-        v-model="newPrd.pName" id="pname" placeholder="請輸入產品名稱" required>
-      </div>
-      <div class="form-group">
-        <label for="price">價格</label>
-        <input type="number" class="form-control"
-        v-model="newPrd.price" id="price" placeholder="請輸入價格">
-      </div>
-      <div class="form-group">
-        <label for="qty">數量</label>
-        <input type="number" class="form-control"
-        v-model="newPrd.qty" id="qty" placeholder="請輸入數量">
-      </div>
-      <button type="submit" class="btn btn-sucess">新增</button>
-    </form>
+    </div>
   </div>
 </template>
 <script>
+import $ from "jquery";
+
 export default {
   data() {
     return {
@@ -66,7 +110,14 @@ export default {
         pName:'',
         price:0,
         qty:0
-      }
+      },
+      editPrd:{
+        pId:'',
+        pName:'',
+        price:0,
+        qty:0
+      },
+      isNew:false,
     };
   },
   methods:{
@@ -94,6 +145,7 @@ export default {
           vm.newPrd.pName=''
           vm.newPrd.price=0
           vm.newPrd.qty=0
+          $('#CreatePrd').modal('hide')
         }else{
           console.log("新增失敗 可能產品ID有重複")
         }
@@ -107,6 +159,34 @@ export default {
         console.log(response);
         if(response.status===204){
           vm.getprd();
+        }
+      });
+    },
+    edititem(id){
+      let vm =this
+      //this.getitem(id)
+      let api = `${process.env.API_PATH}/api/pruduct/${id}`;
+      this.$http.put(api,vm.editPrd).then(response => {
+        if(response.status==200){
+          vm.getprd()
+          $('#CreatePrd').modal('hide')
+        }
+      });  
+    },
+    getitem(id){
+      let vm = this;
+      let api = `${process.env.API_PATH}/api/pruduct/${id}`;
+      console.log(api)
+      
+      this.$http.get(api).then(response => {
+        let item = response.data
+        console.log(response.status)
+        if(response.status==200){
+          vm.editPrd.pId=item.pId
+          vm.editPrd.pName=item.pName
+          vm.editPrd.price=item.price
+          vm.editPrd.qty=item.qty
+          console.log(vm.editPrd)
         }
       });  
     }

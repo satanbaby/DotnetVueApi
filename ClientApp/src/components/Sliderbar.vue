@@ -13,6 +13,9 @@
                 <router-link :to='{name:"Order"}'>購物車</router-link>
               </li>
               <li class="nav-item">
+                <router-link :to='{name:"Registered"}'>註冊</router-link>
+              </li>
+              <li class="nav-item">
                 <router-link :to='{name:"Member"}'>會員管理</router-link>
               </li>
             </ul>

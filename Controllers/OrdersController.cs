@@ -10,20 +10,26 @@ namespace homework.Controllers
     [Route("api/[controller]")]
     public class OrdersController : Controller
     {
-        public OrdersController() { }
+        // public OrdersController() { }
+        private readonly ShopingContext SContext;
+        public OrdersController(ShopingContext context) { 
+          SContext=context;
+        }
 
         // GET api/orders
         [HttpGet("")]
-        // public ActionResult<IEnumerable<string>> Gets()
-        // {
-        //     return new string[] { "value1", "value2" };
-        // }
-        public Order Get(){
-          return new Order{
-            OId="123",
-            Member="1234",
+        public IActionResult Gets()
+        {
+            var order = SContext.Orders;
+            var pruduct = SContext.Pruducts;
+            var member = SContext.Members;
+            var item = 
+            from ord in order
+            join prd in pruduct on ord.PruductID.PId equals prd.PId
+            join mem in member on ord.Members.UId equals mem.UId
+            select new{ord.OId,mem.UName,ord.PruductID.PName,ord.orderQty};
             
-          };
+            return Json(item);
         }
 
         // GET api/orders/5

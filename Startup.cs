@@ -69,6 +69,10 @@ namespace homework
             }
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            //使用wwwroot
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
         }
     }
 }

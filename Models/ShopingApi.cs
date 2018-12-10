@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,6 +9,7 @@ namespace homework.Models
       public string UId { get; set; }
       public string UPwd { get; set; }
       public string UName { get; set; }
+      // public IList<Order> orders{get;set;}
       
     }
 
@@ -17,13 +19,14 @@ namespace homework.Models
       public string PName { get; set; }
       public int Price { get; set; }
       public ushort Qty { get; set; }
+      // public IList<Order> orders { get; set; }
     }
     public class Order{
       [Key]
       public string OId { get; set; }
-      public string Member { get; set; }
-      public string PruductID{get;set;}
-      public ushort orderQty { get; set; }
+      public int orderQty { get; set; }
+      public Member Members { get; set; }
+      public Pruduct PruductID{get;set;}
     }
     public class Admin{
       [Key]

@@ -2,7 +2,7 @@
 
 namespace homework.Migrations
 {
-    public partial class init : Migration
+    public partial class init4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using homework.Models;
 
 namespace homework.Migrations
 {
     [DbContext(typeof(ShopingContext))]
-    partial class ShopingContextModelSnapshot : ModelSnapshot
+    [Migration("20181208195638_init4")]
+    partial class init4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,17 +51,13 @@ namespace homework.Migrations
                     b.Property<string>("OId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("MembersUId");
+                    b.Property<string>("Members");
 
-                    b.Property<string>("PruductIDPId");
+                    b.Property<string>("PruductID");
 
                     b.Property<int>("orderQty");
 
                     b.HasKey("OId");
-
-                    b.HasIndex("MembersUId");
-
-                    b.HasIndex("PruductIDPId");
 
                     b.ToTable("Orders");
                 });
@@ -78,17 +76,6 @@ namespace homework.Migrations
                     b.HasKey("PId");
 
                     b.ToTable("Pruducts");
-                });
-
-            modelBuilder.Entity("homework.Models.Order", b =>
-                {
-                    b.HasOne("homework.Models.Member", "Members")
-                        .WithMany()
-                        .HasForeignKey("MembersUId");
-
-                    b.HasOne("homework.Models.Pruduct", "PruductID")
-                        .WithMany()
-                        .HasForeignKey("PruductIDPId");
                 });
 #pragma warning restore 612, 618
         }

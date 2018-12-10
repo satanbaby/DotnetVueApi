@@ -14,6 +14,7 @@ namespace homework.Controllers
   public class ShopingController : ControllerBase
   {
     private readonly ShopingContext SContext;
+    
       public ShopingController(ShopingContext context) { 
         SContext = context;
         if(SContext.Members.Count()==0){
@@ -21,21 +22,21 @@ namespace homework.Controllers
           SContext.SaveChanges();
         }
       }
-      //=================登入===============
-      [HttpPost("login")]
-      public ActionResult Login(Member item){
-        var members=SContext.Members;
-        var member = members.Where(m=>m.UId==item.UId&& m.UPwd==item.UPwd).FirstOrDefault();
-        if(member==null){
-          HttpContext.Session.Clear();
-          return NotFound();
-        }
-        //Session["Member"]=member;
-        HttpContext.Session.SetString("Member",member.ToString());
-        return Ok(member);
-      }
+      // //=================登入===============
+      // [HttpPost("login")]
+      // public ActionResult Login(Member item){
+      //   var members=SContext.Members;
+      //   var member = members.Where(m=>m.UId==item.UId&& m.UPwd==item.UPwd).FirstOrDefault();
+      //   if(member==null){
+      //     HttpContext.Session.Clear();
+      //     return NotFound();
+      //   }
+      //   //Session["Member"]=member;
+      //   HttpContext.Session.SetString("Member",member.UName.ToString());
+      //   return Ok(member);
+      // }
       //=================登出===============
-      [HttpGet]
+      [HttpGet("logout")]
       public ActionResult Logout(){
         HttpContext.Session.Clear();
         return Ok();
@@ -45,7 +46,8 @@ namespace homework.Controllers
       [HttpGet]
       public ActionResult<List<Member>> GetAll()
       {
-          return SContext.Members.ToList();
+        
+        return SContext.Members.ToList();
       }
 
       // GET api/shoping/5

@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using homework.Models;
 
 namespace homework.Migrations
 {
     [DbContext(typeof(ShopingContext))]
-    partial class ShopingContextModelSnapshot : ModelSnapshot
+    [Migration("20181208183003_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,15 +51,13 @@ namespace homework.Migrations
                     b.Property<string>("OId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("MembersUId");
+                    b.Property<string>("Member");
 
                     b.Property<string>("PruductIDPId");
 
                     b.Property<int>("orderQty");
 
                     b.HasKey("OId");
-
-                    b.HasIndex("MembersUId");
 
                     b.HasIndex("PruductIDPId");
 
@@ -82,12 +82,8 @@ namespace homework.Migrations
 
             modelBuilder.Entity("homework.Models.Order", b =>
                 {
-                    b.HasOne("homework.Models.Member", "Members")
-                        .WithMany()
-                        .HasForeignKey("MembersUId");
-
                     b.HasOne("homework.Models.Pruduct", "PruductID")
-                        .WithMany()
+                        .WithMany("orders")
                         .HasForeignKey("PruductIDPId");
                 });
 #pragma warning restore 612, 618

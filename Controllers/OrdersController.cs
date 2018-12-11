@@ -18,8 +18,9 @@ namespace homework.Controllers
 
         // GET api/orders
         [HttpGet("")]
-        public IActionResult Gets()
+        public ResultModel Gets()
         {
+          var result = new ResultModel();
             var order = SContext.Orders;
             var pruduct = SContext.Pruducts;
             var member = SContext.Members;
@@ -27,28 +28,13 @@ namespace homework.Controllers
             from ord in order
             join prd in pruduct on ord.PruductID.PId equals prd.PId
             join mem in member on ord.Members.UId equals mem.UId
-            select new{ord.OId,mem.UName,ord.PruductID.PName,ord.orderQty};
-            
-            return Json(item);
+            select new{ord.OId,mem.UName,ord.PruductID.PName,ord.PruductID.Price,ord.orderQty};
+          result.data=item;
+          result.sucess=true;
+          result.meg="取得訂單資料成功";
+            return result;
         }
 
-        // GET api/orders/5
-        [HttpGet("{id}")]
-        public ActionResult<string> GetById(int id)
-        {
-            return "value" + id;
-        }
-
-        // POST api/orders
-        [HttpPost("")]
-        public void Post([FromBody] string value) { }
-
-        // PUT api/orders/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value) { }
-
-        // DELETE api/orders/5
-        [HttpDelete("{id}")]
-        public void DeleteById(int id) { }
+       
     }
 }

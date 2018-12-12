@@ -1,11 +1,13 @@
 <template>
-  <div class="hello">
+  <div>
     
     <Navbar></Navbar>
 
     <div class="container-fluid">
       <div class="row">
-        <Sliderbar></Sliderbar>
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <Sliderbar></Sliderbar>
+        </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <router-view></router-view>
@@ -38,8 +40,3 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='scss' scoped>
-
-@import '../assets/helpers/all.scss';
-</style>

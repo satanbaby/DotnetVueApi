@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ namespace homework.Models
       public string UId { get; set; }
       public string UPwd { get; set; }
       public string UName { get; set; }
-      // public IList<Order> orders{get;set;}
+      public DateTime RegisterTime { get; set; }
       
     }
 
@@ -25,6 +26,8 @@ namespace homework.Models
       [Key]
       public string OId { get; set; }
       public int orderQty { get; set; }
+      public bool shipment { get; set; }
+      public DateTime CreateTime { get; set; }
       public Member Members { get; set; }
       public Pruduct PruductID{get;set;}
     }

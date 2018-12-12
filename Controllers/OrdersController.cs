@@ -35,6 +35,13 @@ namespace homework.Controllers
             return result;
         }
 
+        //POST api/orders
+        [HttpPost("")]
+        public ResultModel Create(Order item){
+          var result = new ResultModel();
+          return result;
+        }
+
        
     }
 }

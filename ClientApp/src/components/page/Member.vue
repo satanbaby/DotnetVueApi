@@ -8,6 +8,7 @@
           <th scope="col">使用者ID</th>
           <th scope="col">使用者密碼</th>
           <th scope="col">使用者名字</th>
+          <th scope="col">註冊日期</th>
           <th scope="col">編輯</th>
         </tr>
       </thead>
@@ -17,6 +18,7 @@
           <td>{{item.uId}}</td>
           <td>{{item.uPwd}}</td>
           <td>{{item.uName}}</td>
+          <td>{{item.registerTime}}</td>
           <td>
             <div class="btn-group">
               <button class="btn btn-outline-danger mg-0">編輯</button>
@@ -63,20 +65,20 @@ export default {
   },
   methods:{
     getMem(){
-      let api = `${process.env.API_PATH}/api/shoping`;
+      let api = `${process.env.API_PATH}/admin/member`;
       this.$http.get(api).then(response => {
-        console.log(response.data);
-        this.member = response.data;
-        console.log("Member",this.member)
+        console.log(response.data.data);
+        if(response.data.success){
+          this.member = response.data.data;
+        }
       });
     },
     DelMem(id){
       let vm = this;
-      let api = `${process.env.API_PATH}/api/shoping/${id}`;
-      console.log(api)
+      let api = `${process.env.API_PATH}/admin/member/${id}`;
       this.$http.delete(api).then(response => {
-        console.log(response);
-        if(response.status===204){
+        console.log(response.data);
+        if(response.data.success){
           vm.getMem();
         }
       });  

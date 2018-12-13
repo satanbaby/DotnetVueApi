@@ -26,7 +26,6 @@ namespace homework.Models
       [Key]
       public string OId { get; set; }
       public int orderQty { get; set; }
-      public bool shipment { get; set; }
       public DateTime CreateTime { get; set; }
       public Member Members { get; set; }
       public Pruduct PruductID{get;set;}

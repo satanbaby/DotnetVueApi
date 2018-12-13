@@ -30,7 +30,7 @@ namespace homework.Controllers
             join mem in member on ord.Members.UId equals mem.UId
             select new{ord.OId,mem.UName,ord.PruductID.PName,ord.PruductID.Price,ord.orderQty};
           result.data=item;
-          result.sucess=true;
+          result.success=true;
           result.meg="取得訂單資料成功";
             return result;
         }

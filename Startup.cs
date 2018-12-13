@@ -32,13 +32,8 @@ namespace homework
           // using Microsoft.EntityFrameworkCore;
           services.AddDbContext<ShopingContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-          //Session      
-          services.AddDistributedMemoryCache();
-          services.AddSession(Options=>{
-            Options.Cookie.SecurePolicy=CookieSecurePolicy.Always;
-            Options.Cookie.Name="myWebsite";
-            Options.IdleTimeout=TimeSpan.FromMinutes(10);
-          });
+          
+          
 
           //Cors
           services.AddCors();
@@ -55,9 +50,8 @@ namespace homework
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
+          
 
-          //使用session
-          app.UseSession();
 
             if (env.IsDevelopment())
             {

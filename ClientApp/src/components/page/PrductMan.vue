@@ -122,15 +122,15 @@ export default {
   },
   methods:{
     getprd(){
-      let api = `${process.env.API_PATH}/api/pruduct`;
+      let api = `${process.env.API_PATH}/admin/pruduct`;
       this.$http.get(api).then(response => {
-        console.log(response);
-        this.product = response.data;
+        console.log(response.data);
+        this.product = response.data.data;
       });
     },
     creatPrd(){
       let vm = this;
-      let api = `${process.env.API_PATH}/api/pruduct`;
+      let api = `${process.env.API_PATH}/admin/pruduct`;
       let pid = vm.newPrd.pId.trim();
       let pname = vm.newPrd.pName.trim();
       console.log(pid,pname)
@@ -138,8 +138,8 @@ export default {
         return
       }
       this.$http.post(api,vm.newPrd).then(response => {
-        console.log(response);
-        if(response.status===201){
+        console.log(response.data);
+        if(response.data.success){
           vm.getprd();
           vm.newPrd.pId=''
           vm.newPrd.pName=''
@@ -153,11 +153,11 @@ export default {
     },
     deleteitem(id){
       let vm = this;
-      let api = `${process.env.API_PATH}/api/pruduct/${id}`;
+      let api = `${process.env.API_PATH}/admin/pruduct/${id}`;
       console.log(api)
       this.$http.delete(api).then(response => {
-        console.log(response);
-        if(response.status===204){
+        console.log(response.data);
+        if(response.data.success){
           vm.getprd();
         }
       });
@@ -165,9 +165,9 @@ export default {
     edititem(id){
       let vm =this
       //this.getitem(id)
-      let api = `${process.env.API_PATH}/api/pruduct/${id}`;
+      let api = `${process.env.API_PATH}/admin/pruduct/${id}`;
       this.$http.put(api,vm.editPrd).then(response => {
-        if(response.status==200){
+        if(response.data.success){
           vm.getprd()
           $('#CreatePrd').modal('hide')
         }

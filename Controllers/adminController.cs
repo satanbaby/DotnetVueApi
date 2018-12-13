@@ -26,7 +26,7 @@ namespace homework.Controllers
         {
           var result = new ResultModel();
           result.data=SContext.Pruducts.ToList();
-          result.sucess=true;
+          result.success=true;
           result.meg="取得資料成功";
           return result;
         }
@@ -36,12 +36,12 @@ namespace homework.Controllers
         {
           var result = new ResultModel();
           if(SContext.Pruducts.Find(id)==null){
-            result.sucess=false;
+            result.success=false;
             result.meg="此資料可能不存在";
             return result;
           }
           else{
-            result.sucess=true;
+            result.success=true;
             result.data=SContext.Pruducts.Where(m=>m.PId==id).FirstOrDefault();
             result.meg="取得資料成功";
             return result;
@@ -54,12 +54,12 @@ namespace homework.Controllers
           if(SContext.Pruducts.Find(item.PId)==null){
             SContext.Pruducts.Add(item);
             SContext.SaveChanges();
-            result.sucess=true;
+            result.success=true;
             result.meg="新增資料成功";
             result.data=item;
             return result;
           }else{
-            result.sucess=false;
+            result.success=false;
             result.meg="此ID可能已經存在";
             return result;
           }
@@ -71,7 +71,7 @@ namespace homework.Controllers
           var result = new  ResultModel();
           var items = SContext.Pruducts.Find(id);
           if(items==null){
-            result.sucess=false;
+            result.success=false;
             result.meg="此資料不存在";
             return result;
           }else{
@@ -81,7 +81,7 @@ namespace homework.Controllers
               items.Qty=item.Qty            ;
             SContext.Pruducts.Update(items) ;
             SContext.SaveChanges()          ;
-              result.sucess=true            ;
+              result.success=true            ;
               result.meg   ="修改資料成功"   ;
               result.data  =items           ;
             return result                   ;
@@ -95,12 +95,12 @@ namespace homework.Controllers
           var item=SContext.Pruducts.Find(id);
           if(item==null){
             result.meg="此ID不存在";
-            result.sucess=false;
+            result.success=false;
             return result;
           }
           SContext.Pruducts.Remove(item);
           SContext.SaveChanges();
-          result.sucess=true;
+          result.success=true;
           result.data=item;
           result.meg="刪除資料成功";
           return result;
@@ -113,7 +113,7 @@ namespace homework.Controllers
         public ResultModel getMem(){
           var result = new ResultModel();
           result.meg="取得所有會員資訊";
-          result.sucess=true;
+          result.success=true;
           result.data=SContext.Members.ToList();
           return result;
         }
@@ -123,12 +123,12 @@ namespace homework.Controllers
           var result = new ResultModel();
           var item = SContext.Members.Find(id);
           if(item==null){
-            result.sucess=false;
+            result.success=false;
             result.meg="取得會員資料失敗";
             return result;
           }
           result.data=item;
-          result.sucess=true;
+          result.success=true;
           result.meg="取得會員資料成功";
           return result;
         }
@@ -138,13 +138,13 @@ namespace homework.Controllers
           var result = new ResultModel();
           var item = SContext.Members.Find(id);
           if(item==null){
-            result.sucess=false;
+            result.success=false;
             result.meg="沒有這位會員喔";
             return result;
           }
           SContext.Members.Remove(item);
           SContext.SaveChanges();
-          result.sucess=true;
+          result.success=true;
           result.meg="刪除會員資料成功";
           return result;
         }

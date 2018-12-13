@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container text-center">
     <form class="form-signin" @submit="signin">
       <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
       <label for="inputEmail" class="sr-only">帳號</label>
@@ -8,10 +8,10 @@
       <label for="inputPassword" class="sr-only">密碼</label>
       <input type="password" id="pwd" class="form-control"
       v-model="user.UPwd" placeholder="密碼" required>
-      <small id="emailHelp" class="form-text text-danger">{{msg}}</small>
+      <!-- <small id="emailHelp" class="form-text text-danger">{{msg}}</small> -->
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
     <router-link class="text-secondary" :to='{name:"Registered"}'>沒有帳號，註冊</router-link>
+    </form>
   </div>
 </template>
 <script>
@@ -22,7 +22,7 @@ export default {
         UId:'',
         UPwd:''
       },
-      msg:'1234'
+      msg:''
     }
   },
   methods:{

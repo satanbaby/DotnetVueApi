@@ -12,7 +12,7 @@
               </li>
               <li class="nav-item">
                 <router-link class="nav-link"
-                  active-class="active" :to='{name:"Order"}'>購物車</router-link>
+                  active-class="active" :to='{name:"Order"}'>訂單管理</router-link>
               </li>
               <!-- <li class="nav-item">
                 <router-link :to='{name:"Registered"}'>註冊</router-link>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-left mb-5">購物車</h1>
+    <h1 class="text-left mb-5">訂單管理</h1>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -33,8 +33,8 @@ export default {
   created() {
     let api = `${process.env.API_PATH}/api/orders`;
     this.$http.get(api).then(response => {
-      console.log(response.data);
-      this.order = response.data;
+      console.log(response.data.data);
+      this.order = response.data.data;
     });
   }
 };

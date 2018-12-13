@@ -36,20 +36,13 @@ export default {
       console.log(vm.userData)
       this.$http.post(api,vm.userData).then(response => {
         
-        console.log(response);
+        console.log(response.data);
+        if(response.data){
+          vm.$router.push("./products")
+        }
       });
     }
   },
-  created() {
-    let vm = this;
-    let api = `${process.env.API_PATH}/api/pruduct`;
-    this.$http.get(api).then(response => {
-      console.log(response);
-      // if(response.statusText=="OK"){
-      //   vm.$router.push("./order")
-      // }
-    });
-  }
 };
 </script>
 

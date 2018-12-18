@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace homework
 {
@@ -33,7 +34,8 @@ namespace homework
           services.AddDbContext<ShopingContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
           
-          
+          services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie();
 
           //Cors
           services.AddCors();
@@ -50,7 +52,7 @@ namespace homework
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
-          
+          app.UseAuthentication();
 
 
             if (env.IsDevelopment())

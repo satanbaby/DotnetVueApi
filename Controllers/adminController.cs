@@ -81,7 +81,7 @@ namespace homework.Controllers
               items.Qty=item.Qty            ;
             SContext.Pruducts.Update(items) ;
             SContext.SaveChanges()          ;
-              result.success=true            ;
+              result.success=true           ;
               result.meg   ="修改資料成功"   ;
               result.data  =items           ;
             return result                   ;
@@ -112,6 +112,9 @@ namespace homework.Controllers
         [HttpGet("member")]
         public ResultModel getMem(){
           var result = new ResultModel();
+          var item = SContext.Members.ToList();
+          
+
           result.meg="取得所有會員資訊";
           result.success=true;
           result.data=SContext.Members.ToList();

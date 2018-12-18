@@ -30,6 +30,14 @@ namespace homework.Models
       public Member Members { get; set; }
       public Pruduct PruductID{get;set;}
     }
+    //輸入資料模型，不進入Dbset
+    public class enterOrder{
+        public string prdId { get; set; }
+        public ushort qty { get; set; }
+        public string memId { get; set; }
+    }
+
+
     public class Admin{
       [Key]
       public string Account { get; set; }

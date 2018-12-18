@@ -27,8 +27,7 @@ namespace homework.Controllers
           HttpContext.Session.Clear();
           return NotFound();
         }
-        //Session["Member"]=member;
-        HttpContext.Session.SetString("Member",member.UName.ToString());
+        Response.Cookies.Append("name",item.UName);
         return Ok(member);
       }
       //=================登出===============

@@ -34,8 +34,7 @@ namespace homework
           services.AddDbContext<ShopingContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
           
-          services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie();
+          
 
           //Cors
           services.AddCors();

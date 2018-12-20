@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using homework.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace homework.Controllers
 {
@@ -42,6 +43,11 @@ namespace homework.Controllers
         // [HttpGet("test")]
         // public ResultModel get(){
         //   var result = new ResultModel();
+        //   var item = SContext.Pruducts
+        //               .FromSql("SELECT * FROM Pruducts")
+        //               .ToList();
+        //   result.data=item;
+        //   result.success=true;
         //   return result;
         // }
 

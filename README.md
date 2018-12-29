@@ -1,71 +1,22 @@
 # 期末作業
 
+執行步驟
+
 ```
 git clone https://github.com/satanbaby/DotnetVueApi.git
-dotnet restore
-cd ClientApp
-npm install
-npm run dev
-cd ..
 dotnet run
 ```
-### 使用技術
 
-dotnet core webApi + vue.js + Bootstrap
-
-## 快速導覽
-
-前端
-
-`./ClientApp`
-
-跨網域表頭
-
-`Startup.cs--line42`
-
-ConnectionStrings
-
-`appsettings.json`
-
-## 賣家帳號
+執行環境
 ```
-account:  test
-password: test
+.NET Core SDK (反映任何 global.json):
+    Version:   2.1.502
+    
+Host (useful for support):
+    Version: 2.1.6
 ```
-
-## 會員api
+連接字串
 ```
-取得所有會員
-get
-api/shoping
-取得特定會員
-get id
-api/shoping/:id
-註冊會員
-post
-api/shoping
-刪除會員
-delete
-api/shoping/:id
-編輯會員
-put
-api/shoping/:id
-```
-## 產品
-```
-取得所有產品
-get
-api/pruduct
-取得特定產品
-get id
-api/pruduct/:id
-新增特定產品
-post
-api/pruduct
-修改產品
-put id
-api/pruduct/:id
-刪除產品
-delete id
-api/pruduct/:id
+appsettings.json
+└line3 :DefaultConnection
 ```

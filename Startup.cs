@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 
 namespace homework
 {
@@ -34,8 +35,6 @@ namespace homework
           services.AddDbContext<ShopingContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
           
-          
-
           //Cors
           services.AddCors();
           services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

@@ -20,14 +20,12 @@ namespace homework.Controllers
       }
       //=================登入===============
       [HttpPost("login")]
-      public ActionResult Login(Member item){
+      public ActionResult Login(Login item){
         var members=SContext.Members;
-        var member = members.Where(m=>m.UId==item.UId&& m.UPwd==item.UPwd).FirstOrDefault();
+        var member = members.Where(m=>m.UId==item.uid && m.UPwd==item.pwd).FirstOrDefault();
         if(member==null){
-          HttpContext.Session.Clear();
           return NotFound();
         }
-        Response.Cookies.Append("name",item.UName);
         return Ok(member);
       }
       //=================登出===============

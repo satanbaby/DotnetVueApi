@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import 'bootstrap/js/dist/modal';
-import '@fortawesome/fontawesome-free/css/all.css'
 
 import Home from '@/components/Home'
 import Login from '@/components/page/Login'
@@ -18,11 +17,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
+      // name: 'Home',
       component: Home,
       children: [
         {
-          path: '/',
+          path: '',
           name: 'Product',
           component: Products,
        },{

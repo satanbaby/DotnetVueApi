@@ -1,6 +1,6 @@
 <template>
   <div class="container text-center">
-    <form class="form-signin" @submit="signin">
+    <form class="form-signin" @submit="getToken">
       <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
       <label for="inputEmail" class="sr-only">帳號</label>
       <input type="text" id="id" class="form-control" 
@@ -8,8 +8,8 @@
       <label for="inputPassword" class="sr-only">密碼</label>
       <input type="password" id="pwd" class="form-control"
       v-model="user.UPwd" placeholder="密碼" required>
-      <!-- <small id="emailHelp" class="form-text text-danger">{{msg}}</small> -->
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <small class="form-text text-danger">{{msg}}</small>
+      <input class="btn btn-lg btn-primary btn-block" type="submit" value="登入">
     <router-link class="text-secondary" :to='{name:"Registered"}'>沒有帳號，註冊</router-link>
     </form>
   </div>
@@ -26,19 +26,26 @@ export default {
     }
   },
   methods:{
-    signin(){
+    getToken(){
       let vm = this;
-      console.log(vm.user)
-      let api = `${process.env.API_PATH}/api/shoping/login`
-      this.$http.post(api,vm.user).then((response) => {
+      let api = `${process.env.API_PATH}/api/Login`
+      // this.$http.post(api,vm.user).then((response) => {
+      //   console.log('login',response)
+      //   if(response.status==200){
+      //     this.$router.push({name:"Member"})
+      //   }
+      // })
+      this.$http.get(api).then(response =>{
         console.log(response)
-        if(response.status==200){
-          this.$router.push({"name":"Product"})
-        }else{
-          console.log(response)
-          // console.log("帳號密碼錯誤")
-          // vm.msg="帳號密碼錯誤!"
+        if (response.status==200) {
+          localStorage.setItem("token",response.data.token)
+          // this.Login(response.data.token)
+          this.$router.push('/')
         }
+      })
+      .catch((error)=>{
+        vm.msg= '密碼錯誤'
+        console.log(error)
       })
     }
   }

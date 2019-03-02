@@ -40,7 +40,25 @@ namespace homework.Controllers
           result.meg="取得訂單資料成功";
             return result;
         }
-        // [HttpGet("test")]
+
+        [HttpGet("Test")]
+        public ResultModel GetModel(){
+          ResultModel result = new ResultModel();
+          var ord = SContext.Orders;
+          var prd = SContext.Pruducts;
+
+          var q = ord.Select(item => new{
+                    item.OId,
+                    item.orderQty
+                  })
+                  ;
+          
+          result.data = q;
+          return result;
+        }
+
+
+        // [HttpGet("testSP")]
         // public ResultModel get(){
         //   var result = new ResultModel();
         //   var item = SContext.Pruducts

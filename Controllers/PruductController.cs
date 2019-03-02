@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using homework.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace homework.Controllers
 {
@@ -18,9 +19,12 @@ namespace homework.Controllers
         }
         // GET api/pruduct
         [HttpGet("")]
-        public ActionResult<List<Pruduct>> GetAll()
+        [Authorize]
+        public ActionResult GetAll()
         {
-          return SContext.Pruducts.ToList();
+          IEnumerable<Pruduct> pruduct = SContext.Pruducts;
+          IEnumerable<Pruduct> pruducts = pruduct.Where(item => item.Price>400);
+          return Ok(pruducts);
         }
 
         // GET api/pruduct/5

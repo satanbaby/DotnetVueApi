@@ -11,7 +11,10 @@ namespace homework.Models
       public string UPwd { get; set; }
       public string UName { get; set; }
       public DateTime RegisterTime { get; set; }
-      
+    }
+    public class Login{
+      public string uid { get; set; }
+      public string pwd { get; set; }
     }
 
     public class Pruduct{

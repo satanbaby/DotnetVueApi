@@ -16,7 +16,7 @@ methods:{
   signOut(){
       let vm = this;
       console.log(vm.user)
-      this.$router.push({"name":"Login"})
+      this.$router.push({name:"Login"})
       // let api = `${process.env.API_PATH}/api/shoping/Logout`
       // this.$http.get(api).then((response) => {
       //   console.log(response)
